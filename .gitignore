@@ -5,3 +5,6 @@ Downloads/
 .gitignore.un~
 .un~
 .gitignore~
+venv/
+geckodriver.log
+
