@@ -1,17 +1,19 @@
 import json
 import os
 import ScanFolder
+from pathlib import Path
 from halo import Halo
 
 
 class Repository:
-    def __init__(self):
+    def __init__(self, game_path: str):
         self.filename = "Repo.json"
         self.loaded_mods = self.read_repo()
+        self.game_path = Path(game_path)
 
     def installed_mods(self) -> str:
         with Halo(text='Loading\n', spinner='dots'):
-            scanner = ScanFolder.ScanFolder(r"C:\Sandbox\mathe\RimWorld\user\current\RimWorld.v1.0.2231\X64\Mods")
+            scanner = ScanFolder.ScanFolder(f"{self.game_path.absolute()}\Mods")
             return scanner.get_mods_as_json()
 
     def read_repo(self) -> dict:
